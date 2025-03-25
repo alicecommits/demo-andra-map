@@ -80,11 +80,11 @@ def main():
         st.subheader("Radiation Data by Commune")
 
         # Add this after the columns
-        with st.expander("☢️ About Radiation Data (Expand to know more...) 🤔", expanded=False):
+        with st.expander("☢️ About Radiation Data (Expand to learn more...) 🤔", expanded=False):
                 st.markdown("""
                 ### Understanding Radiation Measurements
                 
-                The data displayed in this table is sourced from the French Nuclear Safety Authority (ASN) and shows the average annual radiation exposure in **microsieverts per year** (µSv/year).
+                The data displayed in this table is sourced from the French Nuclear Safety and Radioprotection Authority (ASNR) and shows the average annual radiation exposure in **microsieverts per year** (µSv/year).
                 
                 **Radiation Types:**
                 - 🌍 **Telluric Radiation**: Natural radiation from the Earth's crust
