@@ -168,10 +168,11 @@ def create_map_visualization(gdf, selected_row=None):
             <strong>{row['Commune']}</strong><br>
             Department: {row['Département']}<br>
             Total Radiation: {row['Total Radiation (µSv/year)']:.0f} µSv/year<br>
-            Telluric: {row['Telluric Radiation (µSv/year)']:.0f} µSv/year<br>
-            Cosmic: {row['Cosmic Radiation (µSv/year)']:.0f} µSv/year<br>
-            Radon (Individual): {row['Radon - Individual House (µSv/year)']:.0f} µSv/year<br>
-            Nuclear Tests & Chernobyl: {row['Nuclear Tests & Chernobyl (µSv/year)']:.0f} µSv/year<br>
+            - Telluric: {row['Telluric Radiation (µSv/year)']:.0f} µSv/year<br>
+            - Cosmic: {row['Cosmic Radiation (µSv/year)']:.0f} µSv/year<br>
+            - Radon (Individual): {row['Radon - Individual House (µSv/year)']:.0f} µSv/year<br>
+            - Radon (Collective): {row['Radon - Collective Housing (µSv/year)']:.0f} µSv/year<br>
+            - Nuclear Tests & Chernobyl: {row['Nuclear Tests & Chernobyl (µSv/year)']:.0f} µSv/year<br>
             """
             
             # Add a circle marker
