@@ -16,14 +16,13 @@ st.set_page_config(
 # Here the data filter
 
 st.title("Alice's demo: Exposure of the French population to Ionization Radiation, 2021 results")
-st.text(
-"""[FR] "L’ASNR a publié en 2021 un rapport qui présente le bilan de l’exposition de la population française aux rayonnements ionisants, sur la période 2014-2019. L’imagerie médicale et le radon constituent les sources principales de cette exposition. Viennent ensuite le rayonnement tellurique, l’incorporation de radionucléides naturels, le rayonnement cosmique, et enfin l’usage industriel et militaire de la radioactivité, essentiellement via les anciennes retombées des essais nucléaires atmosphériques et de l’accident de Tchernobyl."
-Note: le périmètre de l'étude se concentre sur la France Métropolitaine.
-
-[ENG] "The same text in English"
+st.text("""[ENG] "In 2021, the ASNR published a report presenting an assessment of the exposure of the French population to ionizing radiation over the 2014-2019 period. Medical imaging and radon constitute the main sources of this exposure. These are followed by telluric radiation, the incorporation of natural radionuclides, cosmic radiation, and finally the industrial and military use of radioactivity, primarily through the residual fallout from atmospheric nuclear tests and the Chernobyl accident. Note: the scope of the study focuses on mainland France."
 """)
+with st.expander("Read in French", expanded=False):
+    st.markdown("""[FR] "L’ASNR a publié en 2021 un rapport qui présente le bilan de l’exposition de la population française aux rayonnements ionisants, sur la période 2014-2019. L’imagerie médicale et le radon constituent les sources principales de cette exposition. Viennent ensuite le rayonnement tellurique, l’incorporation de radionucléides naturels, le rayonnement cosmique, et enfin l’usage industriel et militaire de la radioactivité, essentiellement via les anciennes retombées des essais nucléaires atmosphériques et de l’accident de Tchernobyl."
+    Note: le périmètre de l'étude se concentre sur la France Métropolitaine.""")
+    
 st.info("""**Source**: [French Data Gouv API - Exposition de la population française aux rayonnements ionisants](https://www.data.gouv.fr/fr/datasets/exposition-de-la-population-francaise-aux-rayonnements-ionisants/)""")
-
 
 # --- Main App constants ---
 # Specify the path to the CSV file
@@ -31,8 +30,7 @@ CSV_PATH = "data/communes.csv"
 CSV_PATH_DEMO = "data/communes_samples.csv"
 
 # --- Demo mode ON/OFF feature ---
-# To avoid loading time of all geo data,
-# Initialize to True (demo mode ON by default)
+# Initialize to True (demo mode ON by default) to avoid loading >35,000 datapoints
 if "is_demo" not in st.session_state:
     st.session_state.is_demo = True
 def toggle_demo_mode():
@@ -71,7 +69,7 @@ def main():
     
     # To avoid loading time of real geo data, turn to demo
     if st.session_state.is_demo:
-        st.button("Switch to Full Dataset", on_click=toggle_demo_mode)
+        st.button("Switch to Full Dataset (⚠️ ALL >35k datapoints!)", on_click=toggle_demo_mode)
     else:
         st.button("Switch to Demo Dataset", on_click=toggle_demo_mode)
     
@@ -79,7 +77,23 @@ def main():
     col1, col2 = st.columns([1, 2])
     
     with col1:
-        # Create interactive table
+        st.subheader("Radiation Data by Commune")
+
+        # Add this after the columns
+        with st.expander("☢️ About Radiation Data (Expand to know more...) 🤔", expanded=False):
+                st.markdown("""
+                ### Understanding Radiation Measurements
+                
+                The data displayed in this table is sourced from the French Nuclear Safety Authority (ASN) and shows the average annual radiation exposure in **microsieverts per year** (µSv/year).
+                
+                **Radiation Types:**
+                - 🌍 **Telluric Radiation**: Natural radiation from the Earth's crust
+                - 🌌 **Cosmic Radiation**: Radiation from space reaching Earth's surface
+                - 💨 **Radon Exposure**: A radioactive gas that comes from the ground
+                - ☣️ **Nuclear Tests & Chernobyl**: Residual radiation from historic events
+                
+                For reference, a single chest X-ray exposes you to approximately 100 µSv.
+                """)
         filtered_df, selected_row, show_all, selected_departments = data_processing.create_interactive_table(df)
     
     with col2:

@@ -83,8 +83,6 @@ def create_interactive_table(df):
         filtered_df = df.copy()
     
     # Display the table with ability to select rows
-    st.subheader("Radiation Data by Commune")
-    
     # Use the built-in data_editor for interactivity
     selection = st.data_editor(
     filtered_df,
